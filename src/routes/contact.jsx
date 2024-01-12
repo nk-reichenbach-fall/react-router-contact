@@ -1,14 +1,20 @@
-import { Form } from "react-router-dom";
+import { Form, redirect, useLoaderData } from "react-router-dom";
+import { deleteContact, getContact } from "../contacts";
+
+export async function loader({ params }) {
+  const contact = await getContact(params.contactId);
+
+  return { contact };
+}
+
+export async function action({ params }) {
+  await deleteContact(params.contactId);
+
+  return redirect(`/`);
+}
 
 export default function Contact() {
-  const contact = {
-    first: "Your",
-    last: "Name",
-    avatar: "https://placekitten.com/g/200/200",
-    twitter: "your_handle",
-    notes: "Some notes",
-    favorite: true,
-  };
+  const { contact } = useLoaderData();
 
   return (
     <div id="contact">
