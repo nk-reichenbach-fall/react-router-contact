@@ -10,6 +10,7 @@ import ErrorPage from "./error-page";
 import Contact, {
   loader as contactLoader,
   action as deleteContact,
+  addFavoriteAction,
 } from "./routes/contact";
 import EditContact, { action as editContact } from "./routes/edit";
 import Index from "./routes";
@@ -22,21 +23,27 @@ const router = createBrowserRouter([
     loader: rootLoader,
     action: rootAction,
     children: [
-      { index: true, element: <Index /> },
       {
-        path: "contacts/:contactId",
-        element: <Contact />,
-        loader: contactLoader,
-      },
-      {
-        path: "contacts/:contactId/edit",
-        element: <EditContact />,
-        loader: contactLoader,
-        action: editContact,
-      },
-      {
-        path: "contacts/:contactId/destroy",
-        action: deleteContact,
+        errorElement: <ErrorPage />,
+        children: [
+          { index: true, element: <Index /> },
+          {
+            path: "contacts/:contactId",
+            element: <Contact />,
+            loader: contactLoader,
+            action: addFavoriteAction,
+          },
+          {
+            path: "contacts/:contactId/edit",
+            element: <EditContact />,
+            loader: contactLoader,
+            action: editContact,
+          },
+          {
+            path: "contacts/:contactId/destroy",
+            action: deleteContact,
+          },
+        ],
       },
     ],
   },
