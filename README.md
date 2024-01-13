@@ -27,4 +27,4 @@ Nothing new that is not explained in React Router Tutorial.
 - Optimistic UI
 - Pathless Route
 
-Made from [React Router Tutorial](https://reactrouter.com/en/main/start/tutorial) <3
+Made from [React Router Tutorial](https://reactrouter.com/en/main/start/tutorial) :sparkling_heart:
